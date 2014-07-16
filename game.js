@@ -33,6 +33,7 @@ function toInfo(fullGameList) {
 function addGame(game, callback) {
   getDeck(function(deck) {
     game.players = [];
+    game.maxPlayers = parseInt(process.env.MAX_PLAYERS || 10);
     game.history = [];
     game.isOver = false;
     game.winnerId = null;
