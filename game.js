@@ -16,7 +16,7 @@ function removeFromArray(array, item) {
 
 function list() {
   return toInfo(_.filter(gameList, function(x) {
-    return x.players.length < 4 && !x.isStarted
+    return x.players.length < game.maxPlayers && !x.isStarted
   }));
 }
 
@@ -30,10 +30,12 @@ function toInfo(fullGameList) {
   });
 }
 
+<<<<<<< HEAD
 function addGame(game, callback) {
   getDeck(function(deck) {
     game.players = [];
     game.maxPlayers = parseInt(process.env.MAX_PLAYERS || 10);
+    game.handSize = parseInt(process.env.HAND_SIZE || 10);
     game.history = [];
     game.isOver = false;
     game.winnerId = null;
@@ -63,7 +65,7 @@ function joinGame(game, player) {
     isCzar: false
     };
 
-    for(var i = 0; i < 7; i++) {
+    for(var i = 0; i < game.handSize; i++) {
         drawWhiteCard(game, joiningPlayer);
     }
 
@@ -125,32 +127,27 @@ function roundEnded(game) {
     player.selectedWhiteCardId = null;
   });
 
-  if(game.players[0].isCzar === true) {
-    game.players[0].isCzar = false;
-    game.players[1].isCzar = true;
-    game.players[1].isReady = false;
-  }
-  else if(game.players[1].isCzar === true) {
-    game.players[1].isCzar = false;
-    game.players[2].isCzar = true;
-    game.players[2].isReady = false;
-  }
-  else if(game.players[2].isCzar === true) {
-    game.players[2].isCzar = false;
-    game.players[3].isCzar = true;
-    game.players[3].isReady = false;
-  }
-  else if(game.players[3].isCzar === true) {
-    game.players[3].isCzar = false;
-    game.players[0].isCzar = true;
-    game.players[0].isReady = false;
-  }
-    if(game.isOver){
-        _.map(game.players, function(p) {
-            p.awesomePoints = 0;
-        });
-        game.isOver = false;
+  for(i = 0; i < game.maxPlayers; i++) {
+    if(game.players[i].isCzar === true) {
+      if(i === game.maxPlayers - 1) {
+        game.players[i].isCzar = false;
+        game.players[0].isCzar = true;
+        game.players[0].isReady = false;
+      } else {
+        game.players[i].isCzar = false;
+        game.players[i+1].isCzar = true;
+        game.players[i+1].isReady = false;
+      }
+      break;
     }
+  }
+
+  if(game.isOver){
+    _.map(game.players, function(p) {
+      p.awesomePoints = 0;
+    });
+    game.isOver = false;
+  }
 }
 
 function drawWhiteCard(game, player) {
@@ -200,7 +197,7 @@ function selectCard(gameId, playerId, whiteCardId) {
     return x.selectedWhiteCardId;
   });
 
-  if(readyPlayers.length === 3) {
+  if(readyPlayers.length === (game.maxPlayers -1)) {
     game.isReadyForScoring = true;
   }
 }
