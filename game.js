@@ -30,11 +30,11 @@ function toInfo(fullGameList) {
   });
 }
 
-<<<<<<< HEAD
 function addGame(game, callback) {
   getDeck(function(deck) {
     game.players = [];
     game.maxPlayers = parseInt(process.env.MAX_PLAYERS || 10);
+    game.minPlayers = parseInt(process.env.MIN_PLAYERS || 3);
     game.handSize = parseInt(process.env.HAND_SIZE || 10);
     game.history = [];
     game.isOver = false;
@@ -71,7 +71,7 @@ function joinGame(game, player) {
 
     game.players.push(joiningPlayer);
 
-    if(game.players.length === 4) {
+    if(game.players.length === game.minPlayers) {
         if(!game.isStarted){
             startGame(game);
         } else {
