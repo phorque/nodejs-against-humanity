@@ -32,11 +32,19 @@ Then run the following instead of `node server.js`:
 
     nodemon server.js
 
+## Configuration with environment variables
+
+* `MAX_PLAYERS`: maximum number of players in a game (default: 10)
+* `MIN_PLAYERS`: minimum number of players in a game (default: 3)
+* `HAND_SIZE`: number of "white" cards (default: 10)
+* `POINTS_TO_WIN`: points to win a game (default: 5)
+* `CARDS_PATH`: URL to a JSON describing the deck (default: `cards.json`)
+
 ##Signing up, and deploying to Nodejitsu
 
 ###Documentation
 
-The documenation was available on the front page (right under the sign up for free button): https://www.nodejitsu.com/getting-started/
+The documentation was available on the front page (right under the sign up for free button): https://www.nodejitsu.com/getting-started/
 
 Install the Nodejitsu Package
 
