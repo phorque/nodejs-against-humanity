@@ -1,6 +1,13 @@
 var _ = require('underscore');
 var cards = require('./cards.js');
 
+var config = {
+  maxPlayers: parseInt(process.env.MAX_PLAYERS || 10),
+  minPlayers: parseInt(process.env.MIN_PLAYERS || 3),
+  handSize: parseInt(process.env.HAND_SIZE || 10),
+  pointsToWin: parseInt(process.env.POINTS_TO_WIN || 5),
+};
+
 var gameList = [];
 
 function getDeck(callback) {
@@ -16,7 +23,7 @@ function removeFromArray(array, item) {
 
 function list() {
   return toInfo(_.filter(gameList, function(x) {
-    return x.players.length < game.maxPlayers && !x.isStarted
+    return x.players.length < config.maxPlayers && !x.isStarted
   }));
 }
 
@@ -33,9 +40,9 @@ function toInfo(fullGameList) {
 function addGame(game, callback) {
   getDeck(function(deck) {
     game.players = [];
-    game.maxPlayers = parseInt(process.env.MAX_PLAYERS || 10);
-    game.minPlayers = parseInt(process.env.MIN_PLAYERS || 3);
-    game.handSize = parseInt(process.env.HAND_SIZE || 10);
+    game.maxPlayers = config.maxPlayers;
+    game.minPlayers = config.minPlayers;
+    game.handSize = config.handSize;
     game.history = [];
     game.isOver = false;
     game.winnerId = null;
@@ -45,8 +52,9 @@ function addGame(game, callback) {
     game.currentBlackCard = "";
     game.isReadyForScoring = false;
     game.isReadyForReview = false;
-    game.pointsToWin = parseInt(process.env.POINTS_TO_WIN || 5);
+    game.pointsToWin = config.pointsToWin;
     gameList.push(game);
+    callback(game);
   });
 }
 
@@ -234,3 +242,4 @@ exports.selectCard = selectCard;
 exports.selectWinner = selectWinner;
 exports.removeFromArray = removeFromArray;
 exports.getDeck = getDeck;
+exports.config = config;

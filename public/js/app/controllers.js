@@ -250,6 +250,7 @@ angular.module('myApp.controllers', [])
         $scope.gameSvc = GameService;
 
         $scope.getGames = function() {
+            console.log("GAMES");
             GameService.getGames()
                 .then(function(success) {
                     var games = success.data;
@@ -257,6 +258,11 @@ angular.module('myApp.controllers', [])
                     $scope.availableGames = games;
             });
         };
+
+        GameService.getConfig()
+            .then(function(success) {
+                $scope.config = success.data;
+            });
 
         function initSocket() {
             socket = io.connect('/lobby');

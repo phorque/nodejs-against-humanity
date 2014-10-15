@@ -72,6 +72,7 @@ io.sockets.on('connection', function(socket) {
 
 app.get('/', routes.index);
 app.get('/views/*', routes.partials);
+app.get('/config', function(req, res) { res.json(Game.config); });
 app.get('/list', function (req, res) { res.json(Game.list()); });
 app.get('/listall', function (req, res) { res.json(Game.listAll()); });
 app.post('/add', function (req, res) {

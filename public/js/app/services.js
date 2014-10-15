@@ -25,6 +25,9 @@ angular.module('myApp.services', [])
                     this.playerName = 'anonymous ' + s4();
                 }
             },
+            getConfig: function() {
+                return $http.get('/config');
+            },
             getGames: function() {
                 return $http.get('/list');
             },
