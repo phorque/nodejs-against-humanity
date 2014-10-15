@@ -42,7 +42,7 @@ function addGame(game, callback) {
     game.currentBlackCard = "";
     game.isReadyForScoring = false;
     game.isReadyForReview = false;
-    game.pointsToWin = 5;
+    game.pointsToWin = parseInt(process.env.POINTS_TO_WIN || 5);
     gameList.push(game);
   });
 }
