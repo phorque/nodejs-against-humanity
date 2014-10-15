@@ -3,8 +3,8 @@ var cards = require('./cards.js');
 
 var gameList = [];
 
-function getDeck() {
-  return cards.getDeck();
+function getDeck(callback) {
+  return cards.getDeck(callback);
 }
 
 function removeFromArray(array, item) {
@@ -30,20 +30,21 @@ function toInfo(fullGameList) {
   });
 }
 
-function addGame(game) {
-  game.players = [];
-  game.history = [];
-  game.isOver = false;
-  game.winnerId = null;
-  game.winningCardId = null;
-  game.isStarted = false;
-  game.deck = getDeck();
-  game.currentBlackCard = "";
-  game.isReadyForScoring = false;
-  game.isReadyForReview = false;
-  game.pointsToWin = 5;
-  gameList.push(game);
-  return game;
+function addGame(game, callback) {
+  getDeck(function(deck) {
+    game.players = [];
+    game.history = [];
+    game.isOver = false;
+    game.winnerId = null;
+    game.winningCardId = null;
+    game.isStarted = false;
+    game.deck = deck;
+    game.currentBlackCard = "";
+    game.isReadyForScoring = false;
+    game.isReadyForReview = false;
+    game.pointsToWin = 5;
+    gameList.push(game);
+  });
 }
 
 function getGame(gameId) {

@@ -75,9 +75,10 @@ app.get('/views/*', routes.partials);
 app.get('/list', function (req, res) { res.json(Game.list()); });
 app.get('/listall', function (req, res) { res.json(Game.listAll()); });
 app.post('/add', function (req, res) {
-    var newGame = Game.addGame(req.body);
+  Game.addGame(req.body, function(newGame) {
     res.json(newGame);
     lobbySocket.emit('gameAdded', Game.list());
+  });
 });
 app.get('/gamebyid', function (req, res) { res.json(Game.getGame(req.query.id)); });
 
