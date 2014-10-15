@@ -1,5 +1,5 @@
 {
-  black: [
+  "black": [
     "A romantic candlelit dinner would be incomplete without __________.",
     "After Hurricane Katrina, Sean Penn brought __________ to the people of New Orleans.",
     "After the earthquake, Sean Penn brought __________ to the people of Haiti.",
@@ -103,9 +103,9 @@
     "__________: Kid-tested, mother-approved.",
     "__________: good to the last drop.",
     "__________: kid tested, mother approved.",
-    "__________? There's an app for that.",
+    "__________? There's an app for that."
   ],
-  white: [
+  "white": [
     "72 virgins",
     "8 oz. of sweet Mexican black-tar heroin",
     "A Bop It™",
@@ -643,7 +643,7 @@
     "World peace",
     "YOU MUST CONSTRUCT ADDITIONAL PYLONS",
     "Yeast",
-    "Zeus's sexual appetites",
+    "Zeus's sexual appetites"
   ]
 }
 
