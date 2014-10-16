@@ -108,6 +108,7 @@ function departGame(gameId, playerId) {
             //kill the game
             removeFromArray(gameList, game);
         }
+        roundEnded(game);
     }
 }
 
