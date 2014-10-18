@@ -136,7 +136,7 @@ function roundEnded(game) {
     player.selectedWhiteCardId = null;
   });
 
-  for(i = 0; i < game.maxPlayers; i++) {
+  for(i = 0; i < game.players.length; i++) {
     if(game.players[i].isCzar === true) {
       if(i === game.maxPlayers - 1) {
         game.players[i].isCzar = false;
