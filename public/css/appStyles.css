@@ -1,3 +1,32 @@
+.jumbotron {
+    margin-top: 30px;
+    background: transparent;
+}
+
+form[name="lobbyForm"] {
+}
+
+form[name="lobbyForm"] input {
+    padding: 30px 20px;
+    font-size: 30px;
+}
+
+#availableGames {
+    margin-top: 30px;
+}
+
+#availableGames .createGame {
+    margin-top: 20px;
+}
+
+#availableGames .well > span {
+    float: left;
+}
+
+#availableGames .well > button {
+    float: right;
+}
+
 .blackCard {
   font-weight: bold;
   font-size: 25px;

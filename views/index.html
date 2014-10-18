@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp" ng-controller="HomeCtrl">
   <head>
     <meta charset="utf-8">
-    <title>NodeJS Against Humanity</title>
+    <title>Cards Against Humanity</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Le styles -->
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
@@ -13,44 +13,22 @@
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#humanity-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">NodeJS Against Humanity</a>
-    </div>
-    <div class="navbar-collapse collapse" id="humanity-navbar-collapse">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Cards Against Humanity</a>
+      </div>
       <ul class="nav navbar-nav">
-        <li id="aCreatGame" ng-show="inLobby"><a href="" ng-click="createGame()">Create Game</a></li>
+        <li>
+          <a href="http://www.lantredugeek.com/jeu-de-cartes-cards-against-humanity/" target="_blank">Règles du jeu</a>
+        </li>
       </ul>
-      <form ng-show="inLobby" class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="enter your name" ng-model="gameSvc.playerName">
-        </div>
-      </form>
-    </div>
     </nav>
     <div class="container">
-      <div style="margin-left: 15px; margin-right: 15px;" ng-view></div>
-
-      <br/>
-      <br/>
-      <br/>
-      <div class="row" style="border: solid 1px silver; padding: 10px; margin: 10px;">
-        <div class="col-sm-2">
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.0/">
-            <img alt="Creative Commons License" style="display: block; margin-left: auto; margin-right: auto;" src="http://i.creativecommons.org/l/by-nc-sa/2.0/88x31.png" /></a>
-        </div>
-        <div class="col-sm-10">
-          <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.0/">Creative Commons Attribution-NonCommercial-ShareAlike 2.0 Generic License</a>.</small>
-          <br />
-          <small>This site is not affliated in any way with the official Cards Against Humanities.</small>
-          <br/>
-          <a href="https://github.com/amirrajan/nodejs-against-humanity">The source is here. I accept pull requests (tech: NodeJS, AngularJS)</a>.
-          <div>Last Release:&nbsp;<span app-version></span></div>
+      <div ng-view></div>
+      <div class="row">
+        <div class="col-sm-10" style="position: absolute; bottom: 20px;">
+          <strong>CC BY-NC-SA</strong> -
+          <a href="https://github.com/amirrajan/nodejs-against-humanity" target="_blank">Version originale créé par Amir Rajan</a> -
+          <a href="https://github.com/phorque/nodejs-against-humanity" target="_blank">Fork me on Github</a>
         </div>
       </div>
     </div>
