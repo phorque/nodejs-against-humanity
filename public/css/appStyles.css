@@ -7,8 +7,10 @@ form[name="lobbyForm"] {
 }
 
 form[name="lobbyForm"] input {
-    padding: 30px 20px;
+    height: 60px;
+    width: 100%;
     font-size: 30px;
+    line-height: 35px;
 }
 
 #availableGames {
