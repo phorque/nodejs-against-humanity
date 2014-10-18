@@ -11,6 +11,8 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.gameSvc = GameService;
+        $scope.gameSvc.playerName = $location.search()['nickname'];
+
         $scope.inLobby = true;
 
         $scope.createGame = function() {
