@@ -64,8 +64,13 @@ io.sockets.on('connection', function(socket) {
     if(socket.playerId && socket.gameId){
         console.info('socket disconnect ' + socket.playerId);
         delete players[socket.gameId][socket.playerId];
+
         Game.departGame(socket.gameId, socket.playerId);
-        lobbySocket.emit('gameAdded', Game.list());
+        game = Game.getGame(socket.gameId);
+        if (game && (game.players.length < Game.config.minPlayers)) {
+          console.log("Not enough players, wait for a new one.");
+          lobbySocket.emit('gameAdded', Game.list());
+        }
     }
   });
 });
@@ -92,7 +97,7 @@ app.post('/joingame', function (req, res) {
     return null;
   }
 
-  if(game.isStarted || game.players.length >= Game.config.maxPlayers) {
+  if(game.players.length >= Game.config.maxPlayers) {
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error: "too many players" }));
     res.end();
@@ -106,7 +111,12 @@ app.post('/joingame', function (req, res) {
 
 app.post('/departgame', function(req, res) {
     Game.departGame(req.body.gameId, req.body.playerId);
-    lobbySocket.emit('gameAdded', Game.list());
+
+    game = Game.getGame(req.body.gameId);
+    if (game && (game.players.length < Game.config.minPlayers)) {
+      console.log("Not enough players, wait for a new one.");
+      lobbySocket.emit('gameAdded', Game.list());
+    }
     broadcastGame(req.body.gameId);
 });
 

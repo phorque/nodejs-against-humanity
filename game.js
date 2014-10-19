@@ -23,7 +23,7 @@ function removeFromArray(array, item) {
 
 function list() {
   return toInfo(_.filter(gameList, function(x) {
-    return x.players.length < config.maxPlayers && !x.isStarted
+    return x.players.length < config.maxPlayers
   }));
 }
 
@@ -108,6 +108,7 @@ function departGame(gameId, playerId) {
             //kill the game
             removeFromArray(gameList, game);
         }
+        console.log("Player just leave, start the round again.");
         roundEnded(game);
     }
 }
@@ -136,20 +137,16 @@ function roundEnded(game) {
     player.selectedWhiteCardId = null;
   });
 
+  currentCzar = 0;
   for(i = 0; i < game.players.length; i++) {
-    if(game.players[i].isCzar === true) {
-      if(i === game.maxPlayers - 1) {
-        game.players[i].isCzar = false;
-        game.players[0].isCzar = true;
-        game.players[0].isReady = false;
-      } else {
-        game.players[i].isCzar = false;
-        game.players[i+1].isCzar = true;
-        game.players[i+1].isReady = false;
-      }
-      break;
+    if (game.players[i].isCzar) {
+      currentCzar = i;
+      game.players[i].isCzar = false;
     }
+    game.players[i].isReady = false;
   }
+  console.log(game.players);
+  game.players[(currentCzar + 1) % game.players.length].isCzar = true
 
   if(game.isOver){
     _.map(game.players, function(p) {

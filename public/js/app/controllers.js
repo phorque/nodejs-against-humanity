@@ -15,6 +15,11 @@ angular.module('myApp.controllers', [])
 
         $scope.inLobby = true;
 
+        GameService.getConfig()
+            .then(function(success) {
+                $scope.config = success.data;
+            });
+
         $scope.createGame = function() {
             console.info('createGame called');
             GameService.initName();
@@ -260,11 +265,6 @@ angular.module('myApp.controllers', [])
                     $scope.availableGames = games;
             });
         };
-
-        GameService.getConfig()
-            .then(function(success) {
-                $scope.config = success.data;
-            });
 
         function initSocket() {
             socket = io.connect('/lobby');
